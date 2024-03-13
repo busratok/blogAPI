@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 
 // DB
-require("./src/dbConnection");
+require("./src/configs/dbConnection");
 
 app.use(express.json()); // keep it at the top
 
@@ -19,6 +19,6 @@ app.all("/", (req, res) => {
 
 app.use(require("./src/routes/blog.router"));
 
-app.use(require("./src/errorHandler")); // keep it at the bottom
+app.use(require("./src/middlewares/errorHandler")); // keep it at the bottom
 
 app.listen(PORT, () => console.log(`Running on: http://${HOST}:${PORT}`));
