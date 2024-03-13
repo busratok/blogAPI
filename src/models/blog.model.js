@@ -16,12 +16,12 @@ const blogPostSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    // createdAt - default
-    // updatedAt - default
+    // createdAt - default when timestamps is true
+    // updatedAt - default when timestamps is true
   },
   {
     collection: "blogPost",
-    // timestamps: true
+    timestamps: true,
   }
 );
 
