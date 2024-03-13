@@ -24,6 +24,7 @@ const blogPostSchema = new mongoose.Schema(
     blogCategoryId: {
       type: mongoose.Schema.Types.ObjectId, // ForeignKey, RelationalID
       ref: "BlogCategory", // model name
+      required: true,
     },
     title: {
       type: String,
@@ -34,6 +35,10 @@ const blogPostSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+    },
+    published: {
+      type: Boolean,
+      default: true,
     },
     // createdAt - default when timestamps is true
     // updatedAt - default when timestamps is true
