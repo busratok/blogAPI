@@ -21,7 +21,10 @@ const blogCategorySchema = new mongoose.Schema(
 const blogPostSchema = new mongoose.Schema(
   {
     //     _id - auto created,
-    // categoryId:
+    blogCategoryId: {
+      type: mongoose.Schema.Types.ObjectId, // ForeignKey, RelationalID
+      ref: "BlogCategory", // model name
+    },
     title: {
       type: String,
       trim: true,
@@ -42,6 +45,6 @@ const blogPostSchema = new mongoose.Schema(
 );
 
 module.exports = {
-  BlogCategory: mongoose.model("BlogCategory", blogCategorySchema),
+  BlogCategory: mongoose.model("BlogCategory", blogCategorySchema), // model name is the string inside the bracets
   BlogPost: mongoose.model("BlogPost", blogPostSchema),
 };
