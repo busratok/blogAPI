@@ -2,6 +2,22 @@
 
 const mongoose = require("mongoose");
 
+// BLOG CATEGORY
+const blogCategorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  {
+    collection: "blogCategory",
+    timestamps: true,
+  }
+);
+
+// BLOG POST
 const blogPostSchema = new mongoose.Schema(
   {
     //     _id - auto created,
@@ -26,5 +42,6 @@ const blogPostSchema = new mongoose.Schema(
 );
 
 module.exports = {
-  BlogPost: mongoose.model("Blog Post", blogPostSchema),
+  BlogCategory: mongoose.model("BlogCategory", blogCategorySchema),
+  BlogPost: mongoose.model("BlogPost", blogPostSchema),
 };
