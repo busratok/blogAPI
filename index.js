@@ -17,6 +17,7 @@ app.all("/", (req, res) => {
   res.send("Hello");
 });
 
+app.use("/user", require("./src/routes/user.router"));
 app.use("/blog", require("./src/routes/blog.router"));
 
 app.use(require("./src/middlewares/errorHandler")); // keep it at the bottom

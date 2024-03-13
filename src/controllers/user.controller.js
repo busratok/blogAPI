@@ -1,6 +1,6 @@
 "use stict";
 
-const { User } = require("../models/user.model");
+const User = require("../models/user.model");
 
 module.exports = {
   list: async (req, res) => {
