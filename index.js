@@ -22,3 +22,5 @@ app.use("/blog", require("./src/routes/blog.router"));
 app.use(require("./src/middlewares/errorHandler")); // keep it at the bottom
 
 app.listen(PORT, () => console.log(`Running on: http://${HOST}:${PORT}`));
+
+// require("./src/sync")();
