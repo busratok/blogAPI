@@ -46,7 +46,25 @@ module.exports = {
     if (email && password) {
       // const user = await User.findOne({ email: email });
       const user = await User.findOne({ email });
+
       if (user && user.password == passwordEncrypt(password)) {
+        /* Session */
+        // req.session = {
+        //   email: user.email,
+        //   password: user.password,
+        // };
+        req.session.email = user.email;
+        req.session.password = user.password;
+        /* Session */
+
+        /* Cookies */
+        if (req.body.remindMe) {
+          req.session.remindMe = req.body.remindMe;
+          // Set maxAge
+          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3;
+        }
+        /* Cookies */
+
         res.status(200).send({
           error: false,
           message: "Login OK",

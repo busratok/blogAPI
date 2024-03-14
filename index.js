@@ -29,7 +29,11 @@ app.use(
 app.use(express.json()); // keep it at the top
 
 app.all("/", (req, res) => {
-  res.send("Hello");
+  res.send({
+    error: false,
+    message: "Welcome to Blog API",
+    logedInIser: req.session,
+  });
 });
 
 require("express-async-errors");
