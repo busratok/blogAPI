@@ -9,6 +9,11 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: [true, "Email is required"],
       unique: true,
+      // validate: (email) => {return true},
+      validate: [
+        (email) => email.includes("@") && email.includes("."),
+        "Email type is incorrect",
+      ],
     },
     password: {
       type: String,
