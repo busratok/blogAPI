@@ -17,6 +17,7 @@ app.all("/", (req, res) => {
   res.send("Hello");
 });
 
+require("express-async-errors");
 app.use("/user", require("./src/routes/user.router"));
 app.use("/blog", require("./src/routes/blog.router"));
 
