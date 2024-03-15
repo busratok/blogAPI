@@ -28,7 +28,7 @@ module.exports = {
     });
   },
   update: async (req, res) => {
-    const data = await User.update({ _id: req.params.userId }, req.body);
+    const data = await User.updateOne({ _id: req.params.userId }, req.body);
     const updatedData = await User.findOne({ _id: req.params.userId });
     res.status(202).send({
       error: false,
@@ -53,7 +53,7 @@ module.exports = {
         //   email: user.email,
         //   password: user.password,
         // };
-        req.session.email = user.email;
+        req.session.id = user.id;
         req.session.password = user.password;
         /* Session */
 

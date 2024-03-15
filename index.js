@@ -26,14 +26,27 @@ app.use(
   })
 );
 
+// Check logedIn User
+app.use(require("./src/middlewares/userControl"));
+
 app.use(express.json()); // keep it at the top
 
 app.all("/", (req, res) => {
-  res.send({
-    error: false,
-    message: "Welcome to Blog API",
-    logedInIser: req.session,
-  });
+  if (req.isLogin) {
+    res.send({
+      error: false,
+      message: "Welcome to Blog API",
+      session: req.session,
+      user: req.user,
+    });
+  } else {
+    res.send({
+      error: false,
+      message: "Welcome to Blog API",
+      session: req.session,
+      user: req.user,
+    });
+  }
 });
 
 require("express-async-errors");
