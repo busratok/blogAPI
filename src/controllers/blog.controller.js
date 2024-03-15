@@ -59,7 +59,7 @@ module.exports.BlogPost = {
     const search = req.query?.search || {};
 
     for (let key in search) {
-      search[key] = { $regex: search[key] };
+      search[key] = { $regex: search[key], $options: "i" };
     }
 
     // SORT
