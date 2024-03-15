@@ -47,7 +47,28 @@ module.exports.BlogCategory = {
 
 module.exports.BlogPost = {
   list: async (req, res) => {
-    const data = await BlogPost.find();
+    /* FILTERING & SEARCHING & SORTING & PAGINATION */
+
+    // Filtering
+    // URL?filter[key1]=value1&filter[key2]=value2
+    const filter = req.query?.filter || {};
+
+    //Search
+    // URL?search[key1]=value1&search[key2]=value2
+    // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+    const search = req.query?.search || {};
+
+    for (let key in search) {
+      search[key] = { $regex: search[key] };
+    }
+
+    console.log(req.query);
+
+    /* FILTERING & SEARCHING & SORTING & PAGINATION */
+
+    // const data = await BlogPost.find(filter);
+    const data = await BlogPost.find({ ...filter, ...search });
+
     res.status(200).send({
       error: false,
       data,
