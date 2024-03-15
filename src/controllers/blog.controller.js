@@ -68,10 +68,32 @@ module.exports.BlogPost = {
     // asc: A-Z - desc: Z-A
     const sort = req.query?.sort || {};
 
+    // PAGINATION
+    // URL?page=3&limit=10
+
+    // Limit
+    let limit = Number(req.query?.limit);
+    limit = limit > 0 ? limit : Number(process.env.PAGE_SIZE || 20);
+
+    // Page
+    let page = Number(req.query?.page);
+    // page = page > 0 ? page : 1;
+    page = page > 0 ? page - 1 : 0; // page is always should be page-1 in backend to calculate skipping
+
+    // Skip
+    // LIMIT 10, 20
+    let skip = Number(req.query?.skip);
+    skip = skip > 0 ? skip : page * limit;
+
+    console.log(page);
+
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
     // const data = await BlogPost.find(filter);
-    const data = await BlogPost.find({ ...filter, ...search }).sort(sort);
+    const data = await BlogPost.find({ ...filter, ...search })
+      .sort(sort)
+      .skip(skip)
+      .limit(limit);
 
     res.status(200).send({
       error: false,
