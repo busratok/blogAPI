@@ -49,11 +49,11 @@ module.exports.BlogPost = {
   list: async (req, res) => {
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
-    // Filtering
+    // FILTER
     // URL?filter[key1]=value1&filter[key2]=value2
     const filter = req.query?.filter || {};
 
-    //Search
+    //SEARCH
     // URL?search[key1]=value1&search[key2]=value2
     // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
     const search = req.query?.search || {};
@@ -62,12 +62,16 @@ module.exports.BlogPost = {
       search[key] = { $regex: search[key] };
     }
 
-    console.log(req.query);
+    // SORT
+    // URL?sort[key1]=asc&sort[key2]=desc
+    // 1: A-Z - -1: Z-A //deprecated
+    // asc: A-Z - desc: Z-A
+    const sort = req.query?.sort || {};
 
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
     // const data = await BlogPost.find(filter);
-    const data = await BlogPost.find({ ...filter, ...search });
+    const data = await BlogPost.find({ ...filter, ...search }).sort(sort);
 
     res.status(200).send({
       error: false,
