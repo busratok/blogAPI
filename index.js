@@ -11,6 +11,8 @@ const HOST = process.env.HOST;
 // DB
 require("./src/configs/dbConnection");
 
+require("express-async-errors");
+
 /* ------------------------------------------------------- */
 // SessionCookies:
 // http://expressjs.com/en/resources/middleware/cookie-session.html
@@ -28,6 +30,9 @@ app.use(
 
 // Check logedIn User
 app.use(require("./src/middlewares/userControl"));
+
+// Filter, Search, Pagination
+app.use(require("./src/middlewares/findSearchSortPage"));
 
 app.use(express.json()); // keep it at the top
 
@@ -49,7 +54,6 @@ app.all("/", (req, res) => {
   }
 });
 
-require("express-async-errors");
 app.use("/user", require("./src/routes/user.router"));
 app.use("/blog", require("./src/routes/blog.router"));
 
