@@ -41,11 +41,12 @@ module.exports = (req, res, next) => {
 
   /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
-  res.getModelList = async function (Model) {
+  res.getModelList = async function (Model, populate = null) {
     return await Model.find({ ...filter, ...search })
       .sort(sort)
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .populate(populate);
   };
 
   // Details:
